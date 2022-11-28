@@ -1,0 +1,21 @@
+---
+- hosts: localhost
+  connection: local
+  become: true
+
+  pre_tasks:
+    - name: pre-run | update package cache 
+      tags: always
+      apt: update_cache=yes
+      changed_when: False
+
+  tasks:
+  - name: Install apt packages
+    apt:
+      name:
+        - snapd
+        - gnome-tweaks
+        - git
+      deb:
+        - https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+        
